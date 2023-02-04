@@ -1,22 +1,30 @@
 #include "Character.h"
 #include "raymath.h"
 
-Character::Character ()
+Character::Character(int windWidth, int winHeigth)
 {   
     width = texture.width / maxFrames;
     heigth = texture.height;
-}
-
-void Character::setScreenPos(int windWidth, int winHeight)
-{
     screenPos = {
-        (float)windWidth / 2.0f - 4.0f * (0.5f * width),
-        (float)windWidth / 2.0f - 4.0f * (0.5f * heigth)
+        static_cast<float>(windWidth) / 2.0f - scale * (0.5f * width),
+        static_cast<float>(winHeigth) / 2.0f - scale * (0.5f * heigth)
     };
 }
 
+
+
+/*void Character::setScreenPos(int windWidth, int winHeight)
+{
+    screenPos = {
+        (float)windWidth / 2.0f - 4.0f * (0.5f * width),
+        (float)winHeight / 2.0f - 4.0f * (0.5f * heigth)
+    };
+}*/
+
 void Character::tick(float deltaTime)
 {
+    // set variable of last position
+    worldPosLastFrame = worldPosChar;
     // set the direction variable for the movement
     Vector2 direction{};
     // set the movement to all directions
@@ -66,11 +74,17 @@ void Character::tick(float deltaTime)
     source.y = 0.f;
 
     Rectangle dest;
-    dest.width = 4.0f * width;
-    dest.height = 4.0f * heigth;
+    dest.width = scale * width;
+    dest.height = scale * heigth;
     dest.x = screenPos.x;
     dest.y = screenPos.y;
     Vector2 origin{};
 
     DrawTexturePro(texture, source, dest, origin, 0.f, WHITE);
+}
+
+//stop making moves funtions
+void Character::undoMovement()
+{
+    worldPosChar = worldPosLastFrame;
 }

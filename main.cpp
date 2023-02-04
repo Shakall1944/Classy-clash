@@ -16,10 +16,10 @@ int main()
     float worldPosX{};
     float worldPosY{};
     Vector2 worldPos{worldPosX, worldPosY};
+    const float mapScale{4.f};
+    
     // create instance Character + set screen position
-
-    Character knigth;
-    knigth.setScreenPos(windowDimensions[0],windowDimensions[1]);
+    Character knigth{windowDimensions[0],windowDimensions[1]};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -32,10 +32,20 @@ int main()
         worldPos = Vector2Scale(knigth.getWorldPos(), -1.f);
 
         // draw map on the window
-        DrawTextureEx(worldmap, worldPos, 0.0, 4, WHITE);
+        DrawTextureEx(worldmap, worldPos, 0.0, mapScale, WHITE);
 
         // tick function + pass GetFrameTime
         knigth.tick(GetFrameTime());
+        // check map bounds
+        if (knigth.getWorldPos().x < 0.f || 
+            knigth.getWorldPos().y < 0.f ||
+            knigth.getWorldPos().x + windowDimensions[0] > worldmap.width * mapScale ||
+            knigth.getWorldPos().y + windowDimensions[1] > worldmap.height * mapScale
+            )
+        {
+            //stop making moves funtions 
+            knigth.undoMovement();
+        }
 
         EndDrawing();
     }
