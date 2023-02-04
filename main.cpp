@@ -1,6 +1,28 @@
 #include "raylib.h"
 #include "raymath.h"
 
+class Character
+{
+private:
+    Texture2D texture;
+    Texture2D idle;
+    Texture2D run;
+    Vector2 screenPos;
+    Vector2 worldPosChar;
+    // 1 : facing right direction, -1 we are facing the left direc
+    float rightLeft{1.f};
+    // animation variables
+    float runningTime{0.0};
+    int frame{};
+    const int maxFrames{6};
+    const float updateTime{1.f/12.f};
+public:
+    Vector2 getWorldPos() {return worldPosChar; }
+  
+};
+
+
+
 int main()
 {
 
