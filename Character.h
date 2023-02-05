@@ -28,4 +28,5 @@ public:
     void tick(float deltaTime);
     Character(int winWith, int winHeigth);
     void undoMovement();
+    Rectangle GetCollisionRec();
 };
