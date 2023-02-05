@@ -2,6 +2,7 @@
 #include "raymath.h"
 #include "Character.h"
 #include "prop.h"
+#include "enemy.h"
 
 int main()
 {
@@ -25,6 +26,12 @@ int main()
     Prop props[2]{
         Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
         Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+    };
+    // create instance Enemy
+    Enemy goblin{
+        Vector2{0.f, 0.f},
+        LoadTexture("characters/goblin_idle_spritesheet.png"),
+        LoadTexture("characters/goblin_run_spritesheet.png")
     };
     
     // collision variable
@@ -69,6 +76,9 @@ int main()
                 knigth.undoMovement();
             }
         }
+
+        // tick function for enemy 
+        goblin.tick(GetFrameTime());
         
         EndDrawing();
     }

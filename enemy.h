@@ -1,9 +1,16 @@
-// class for char
 #include "raylib.h"
 #include "BaseCharacter.h"
 
-class Character : public BaseCharacter
+class Enemy : public BaseCharacter
 {
+public:
+    Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
+    Vector2 getWorldPos() { return worldPosChar; }
+    // void setScreenPos(int windWidth, int winHeight);
+    void tick(float deltaTime);
+    void undoMovement();
+    Rectangle GetCollisionRec();
+
 private:
     Texture2D texture{LoadTexture("characters/knight_idle_spritesheet.png")};
     Texture2D idle{LoadTexture("characters/knight_idle_spritesheet.png")};
@@ -22,12 +29,4 @@ private:
     float width{};
     float heigth{};
     float scale{4.f};
-
-public:
-    Character(int winWith, int winHeigth);
-    Vector2 getWorldPos() { return worldPosChar; }
-    //void setScreenPos(int windWidth, int winHeight);
-    void tick(float deltaTime);
-    void undoMovement();
-    Rectangle GetCollisionRec();
 };
