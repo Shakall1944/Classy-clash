@@ -21,8 +21,14 @@ int main()
     
     // create instance Character + set screen position
     Character knigth{windowDimensions[0],windowDimensions[1]};
-    //create an instance of prop and def. it
-    Prop rock{Vector2{0.f, 0.f}, LoadTexture("nature_tileset/Rock.png")};
+    //create an instance of prop and def. it with Array
+    Prop props[2]{
+        Prop{Vector2{600.f, 300.f}, LoadTexture("nature_tileset/Rock.png")},
+        Prop{Vector2{400.f, 500.f}, LoadTexture("nature_tileset/Log.png")}
+    };
+    
+    // collision variable
+    //bool collision{};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -37,9 +43,12 @@ int main()
         // draw map on the window
         DrawTextureEx(worldmap, worldPos, 0.0, mapScale, WHITE);
 
-        // draw the prop with Render funtion and knigth function
-        rock.Render(knigth.getWorldPos());
-
+        // draw the prop with Render funtion and knigth function from array
+        for (auto prop : props)
+        {
+            prop.Render(knigth.getWorldPos());
+        }
+        
         // tick function + pass GetFrameTime
         knigth.tick(GetFrameTime());
         // check map bounds
@@ -52,8 +61,15 @@ int main()
             //stop making moves funtions 
             knigth.undoMovement();
         }
-  
-
+        // check collision
+        for (auto prop : props)
+        {
+            if (CheckCollisionRecs(prop.GetCollisionRec(knigth.getWorldPos()), knigth.GetCollisionRec()))
+            {
+                knigth.undoMovement();
+            }
+        }
+        
         EndDrawing();
     }
     UnloadTexture(worldmap);
