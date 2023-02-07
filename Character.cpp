@@ -83,18 +83,4 @@ void Character::tick(float deltaTime)
     DrawTexturePro(texture, source, dest, origin, 0.f, WHITE);
 }
 
-//stop making moves funtions
-void Character::undoMovement()
-{
-    worldPosChar = worldPosLastFrame;
-}
 
-Rectangle Character::GetCollisionRec()
-{
-    return Rectangle{
-    screenPos.x,
-    screenPos.y,
-    width * scale,
-    heigth * scale
-    };
-}

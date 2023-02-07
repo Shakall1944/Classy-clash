@@ -1,11 +1,11 @@
 #include "enemy.h"
 
-Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture) :
-    worldPosChar(pos),
-    texture(idle_texture),
-    idle(idle_texture),
-    run(run_texture)
+Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 {
+    worldPosChar = pos;
+    texture = idle_texture;
+    idle = idle_texture;
+    run = run_texture;
     width = texture.width / maxFrames;
     heigth = texture.height;
 }
@@ -42,17 +42,3 @@ void Enemy::tick(float deltaTime)
 
 }
 
-void Enemy::undoMovement()
-{
-    worldPosChar = worldPosLastFrame;
-}
-
-Rectangle Enemy::GetCollisionRec()
-{
-    return Rectangle{
-    screenPos.x,
-    screenPos.y,
-    width * scale,
-    heigth * scale
-    };
-}
