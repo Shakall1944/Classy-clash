@@ -1,6 +1,8 @@
-#include "raylib.h"
 #ifndef BASE_CHARACTER_H
 #define BASE_CHARACTER_H
+
+#include "raylib.h"
+
 
 class BaseCharacter
 {
@@ -10,6 +12,7 @@ class BaseCharacter
     //void setScreenPos(int windWidth, int winHeight);
     void undoMovement();
     Rectangle GetCollisionRec();
+    virtual void tick(float deltaTime);
 
     protected:
 

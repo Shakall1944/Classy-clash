@@ -34,6 +34,7 @@ int main()
         LoadTexture("characters/goblin_run_spritesheet.png")
     };
     
+    goblin.setTarget(&knigth);
     // collision variable
     //bool collision{};
 

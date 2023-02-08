@@ -1,13 +1,19 @@
 #include "raylib.h"
 #include "BaseCharacter.h"
+#include "Character.h"
 
 class Enemy : public BaseCharacter
 {
 public:
     Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture);
     // void setScreenPos(int windWidth, int winHeight);
-    void tick(float deltaTime);
+    virtual void tick(float deltaTime) override;
+    // funtion to call a pointer to char
+    void setTarget(Character* character) {target = character;}
 
 private:
+    // pointer to knigth
+    Character* target;
+    
 
 };

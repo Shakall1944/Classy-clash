@@ -23,8 +23,7 @@ Character::Character(int windWidth, int winHeigth)
 
 void Character::tick(float deltaTime)
 {
-    // set variable of last position
-    worldPosLastFrame = worldPosChar;
+    BaseCharacter::tick(deltaTime);
     // set the direction variable for the movement
     Vector2 direction{};
     // set the movement to all directions
@@ -57,30 +56,7 @@ void Character::tick(float deltaTime)
     {
         texture = idle;
     }
-    // update animation frame
-    runningTime += deltaTime;
-    if (runningTime >= updateTime)
-    {
-        frame++;
-        runningTime = 0.f;
-        if (frame > maxFrames)
-            frame = 0;
-    }
-    // draw the character in the center of window
-    Rectangle source;
-    source.width = rightLeft * width;
-    source.height = heigth;
-    source.x = frame * width;
-    source.y = 0.f;
 
-    Rectangle dest;
-    dest.width = scale * width;
-    dest.height = scale * heigth;
-    dest.x = screenPos.x;
-    dest.y = screenPos.y;
-    Vector2 origin{};
-
-    DrawTexturePro(texture, source, dest, origin, 0.f, WHITE);
 }
 
 
