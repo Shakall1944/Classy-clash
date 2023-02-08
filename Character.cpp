@@ -51,6 +51,8 @@ void Character::tick(float deltaTime)
         // this is the same code as aobe if statement
         direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
         texture = run;
+        // animation from baseChar class
+
     }
     else
     {

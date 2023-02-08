@@ -9,11 +9,22 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
     run = run_texture;
     width = texture.width / maxFrames;
     heigth = texture.height;
+    speed = 3.5f;
 }
 
 void Enemy::tick(float deltaTime)
 {   
-    // set postion of enemy using pointer to char
+    //this is pseudo code
+    //Get toTarget we will setup vector to character
+
+    Vector2 toTarget = Vector2Subtract(target->getScreenPos(), screenPos);
+
+    //we use Vector2SNormalize for toTarget vector + multiply it with speed
+    toTarget = Vector2Normalize(toTarget);
+    toTarget = Vector2Scale(toTarget, speed);
+    //move enemy using set worldPosChar
+    worldPosChar = Vector2Add(worldPosChar, toTarget);
+    // set position of enemy using pointer to char
     screenPos = Vector2Subtract(worldPosChar, target->getWorldPos());
     BaseCharacter::tick(deltaTime);
 
