@@ -1,4 +1,5 @@
 #include "enemy.h"
+#include "raymath.h"
 
 Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 {
@@ -11,34 +12,10 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 }
 
 void Enemy::tick(float deltaTime)
-{
-    // set variable of last position
-    worldPosLastFrame = worldPosChar;
-
-    // update animation frame
-    runningTime += deltaTime;
-    if (runningTime >= updateTime)
-    {
-        frame++;
-        runningTime = 0.f;
-        if (frame > maxFrames)
-            frame = 0;
-    }
-    // draw the character in the center of window
-    Rectangle source;
-    source.width = rightLeft * width;
-    source.height = heigth;
-    source.x = frame * width;
-    source.y = 0.f;
-
-    Rectangle dest;
-    dest.width = scale * width;
-    dest.height = scale * heigth;
-    dest.x = screenPos.x;
-    dest.y = screenPos.y;
-    Vector2 origin{};
-
-    DrawTexturePro(texture, source, dest, origin, 0.f, WHITE);
+{   
+    // set postion of enemy using pointer to char
+    screenPos = Vector2Subtract(worldPosChar, target->getWorldPos());
+    BaseCharacter::tick(deltaTime);
 
 }
 
