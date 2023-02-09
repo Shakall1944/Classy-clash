@@ -26,7 +26,7 @@ void Enemy::tick(float deltaTime)
     //worldPosChar = Vector2Add(worldPosChar, toTarget);
     // set position of enemy using pointer to char
     //function for normalizing, scaling, adding vector
-    BaseCharacter::tick(deltaTime);
+    //BaseCharacter::tick(deltaTime);
 
 }
 
