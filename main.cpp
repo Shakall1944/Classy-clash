@@ -80,6 +80,15 @@ int main()
 
         // tick function for enemy 
         goblin.tick(GetFrameTime());
+
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+        {
+            if (CheckCollisionRecs( goblin.GetCollisionRec(), knigth.GetCollisionRec()) )
+            {
+                goblin.setAlive(false);
+            }
+        }
+
         
         EndDrawing();
     }

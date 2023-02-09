@@ -25,9 +25,10 @@ Vector2 Character::getScreenPos()
 
 void Character::tick(float deltaTime)
 {
+    //check char is alive
+    if (!getAlive()) return;
 
     // set the direction variable for the movement
-
     // set the movement to all directions
     if (IsKeyDown(KEY_A))
         velocity.x -= 1.0;
@@ -53,7 +54,7 @@ void Character::tick(float deltaTime)
             weapon.width * scale,
             weapon.height * scale
             };
-        rotation = 35.f;
+        rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? 35.f : 0.f;
     }
     else
     {
@@ -65,7 +66,7 @@ void Character::tick(float deltaTime)
             weapon.width * scale,
             weapon.height * scale
             };
-        rotation = -35.f;
+        rotation = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? -35.f : 0.f;
     }
 
     // draw sword

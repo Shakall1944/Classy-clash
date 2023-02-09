@@ -14,6 +14,8 @@ Enemy::Enemy(Vector2 pos, Texture2D idle_texture, Texture2D run_texture)
 
 void Enemy::tick(float deltaTime)
 {   
+    //check char is alive
+    if (!getAlive()) return;
     //this is pseudo code
     //Get toTarget we will setup vector to character
 
@@ -26,7 +28,7 @@ void Enemy::tick(float deltaTime)
     //worldPosChar = Vector2Add(worldPosChar, toTarget);
     // set position of enemy using pointer to char
     //function for normalizing, scaling, adding vector
-    //BaseCharacter::tick(deltaTime);
+    BaseCharacter::tick(deltaTime);
 
 }
 
