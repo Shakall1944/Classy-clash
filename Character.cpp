@@ -1,17 +1,14 @@
 #include "Character.h"
 #include "raymath.h"
 
-Character::Character(int windWidth, int winHeigth)
+Character::Character(int windWidth, int winHeigth) :
+    windowWidth(windWidth),
+    windowHeight(winHeigth)
 {   
     width = texture.width / maxFrames;
     heigth = texture.height;
-    screenPos = {
-        static_cast<float>(windWidth) / 2.0f - scale * (0.5f * width),
-        static_cast<float>(winHeigth) / 2.0f - scale * (0.5f * heigth)
-    };
+  
 }
-
-
 
 /*void Character::setScreenPos(int windWidth, int winHeight)
 {
@@ -20,44 +17,32 @@ Character::Character(int windWidth, int winHeigth)
         (float)winHeight / 2.0f - 4.0f * (0.5f * heigth)
     };
 }*/
+Vector2 Character::getScreenPos()
+{
+    return Vector2{
+        static_cast<float>(windowWidth) / 2.0f - scale * (0.5f * width),
+        static_cast<float>(windowHeight) / 2.0f - scale * (0.5f * heigth)
+    };
+
+}
 
 void Character::tick(float deltaTime)
 {
-    BaseCharacter::tick(deltaTime);
+    
     // set the direction variable for the movement
-    Vector2 direction{};
+    
     // set the movement to all directions
     if (IsKeyDown(KEY_A))
-        direction.x -= 1.0;
+        velocity.x -= 1.0;
     if (IsKeyDown(KEY_D))
-        direction.x += 1.0;
+        velocity.x += 1.0;
     if (IsKeyDown(KEY_W))
-        direction.y -= 1.0;
+        velocity.y -= 1.0;
     if (IsKeyDown(KEY_S))
-        direction.y += 1.0;
-    if (Vector2Length(direction) != 0.0)
-    {
-        // set worldPosChar = worldPosChar + direction + scale vector
+        velocity.y += 1.0;
+    
+    BaseCharacter::tick(deltaTime);
 
-        worldPosChar = Vector2Add(worldPosChar, Vector2Scale(Vector2Normalize(direction), speed));
-        /*if (direction.x < 0.f)
-        {
-                rightLeft = -1.f;
-        }
-        elsewidth
-        {
-            rightLeft = 1.f;
-        }*/
-        // this is the same code as aobe if statement
-        direction.x < 0.f ? rightLeft = -1.f : rightLeft = 1.f;
-        texture = run;
-        // animation from baseChar class
-
-    }
-    else
-    {
-        texture = idle;
-    }
 
 }
 

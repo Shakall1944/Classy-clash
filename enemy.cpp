@@ -17,16 +17,21 @@ void Enemy::tick(float deltaTime)
     //this is pseudo code
     //Get toTarget we will setup vector to character
 
-    Vector2 toTarget = Vector2Subtract(target->getScreenPos(), screenPos);
+    velocity = Vector2Subtract(target->getScreenPos(), getScreenPos());
 
     //we use Vector2SNormalize for toTarget vector + multiply it with speed
-    toTarget = Vector2Normalize(toTarget);
-    toTarget = Vector2Scale(toTarget, speed);
+    //toTarget = Vector2Normalize(toTarget);
+    //toTarget = Vector2Scale(toTarget, speed);
     //move enemy using set worldPosChar
-    worldPosChar = Vector2Add(worldPosChar, toTarget);
+    //worldPosChar = Vector2Add(worldPosChar, toTarget);
     // set position of enemy using pointer to char
-    screenPos = Vector2Subtract(worldPosChar, target->getWorldPos());
+    //function for normalizing, scaling, adding vector
     BaseCharacter::tick(deltaTime);
 
 }
 
+Vector2 Enemy::getScreenPos()
+{
+    return Vector2Subtract(worldPosChar, target->getWorldPos());
+        
+}
