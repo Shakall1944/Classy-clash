@@ -3,6 +3,7 @@
 #include "Character.h"
 #include "prop.h"
 #include "enemy.h"
+#include <string>
 
 int main()
 {
@@ -55,6 +56,19 @@ int main()
         for (auto prop : props)
         {
             prop.Render(knigth.getWorldPos());
+        }
+
+        if(!knigth.getAlive()) // character is not alive
+        {
+            DrawText("Game Over!", 55.f, 45.f, 40, RED);
+            EndDrawing();
+            continue; //  next code is ignore and starting from while loop again
+        }
+        else // char is alive
+        {
+            std::string knigthHealth = "Health: ";
+            knigthHealth.append(std::to_string(knigth.getHealth()), 0, 5);
+            DrawText(knigthHealth.c_str(), 55.f, 45.f, 40, RED);
         }
         
         // tick function + pass GetFrameTime
