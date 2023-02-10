@@ -15,6 +15,6 @@ public:
 private:
     // pointer to knigth
     Character* target;
-    
+    float damagePerSec{10.f};
 
 };

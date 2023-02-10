@@ -36,7 +36,7 @@ int main()
     
     goblin.setTarget(&knigth);
     // collision variable
-    //bool collision{};
+    bool collision{false};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -74,9 +74,16 @@ int main()
         {
             if (CheckCollisionRecs(prop.GetCollisionRec(knigth.getWorldPos()), knigth.GetCollisionRec()))
             {
+                
+                collision = true;
+            }
+            if(collision)
+            {
                 knigth.undoMovement();
             }
         }
+
+        collision = false;
 
         // tick function for enemy 
         goblin.tick(GetFrameTime());

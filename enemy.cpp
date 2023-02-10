@@ -29,6 +29,10 @@ void Enemy::tick(float deltaTime)
     // set position of enemy using pointer to char
     //function for normalizing, scaling, adding vector
     BaseCharacter::tick(deltaTime);
+    if ( CheckCollisionRecs(target->getWeaponCollisonRec(), GetCollisionRec()) )
+    {
+        target->takeDamage(damagePerSec * deltaTime);
+    }
 
 }
 
