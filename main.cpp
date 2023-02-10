@@ -30,14 +30,27 @@ int main()
     };
     // create instance Enemy
     Enemy goblin{
-        Vector2{0.f, 0.f},
+        Vector2{250.f, 250.f},
         LoadTexture("characters/goblin_idle_spritesheet.png"),
         LoadTexture("characters/goblin_run_spritesheet.png")
+       };
+    Enemy slime{
+        Vector2{500.f, 400.f},
+        LoadTexture("characters/slime_idle_spritesheet.png"),
+        LoadTexture("characters/slime_run_spritesheet.png")
+    };
+
+    Enemy* enemies[]{
+        &goblin,
+        &slime
     };
     
-    goblin.setTarget(&knigth);
+    for (auto enemy : enemies)
+    {
+        enemy->setTarget(&knigth);
+    }
     // collision variable
-    bool collision{false};
+    //bool collision{false};
 
     SetTargetFPS(60);
     while (!WindowShouldClose())
@@ -89,25 +102,28 @@ int main()
             if (CheckCollisionRecs(prop.GetCollisionRec(knigth.getWorldPos()), knigth.GetCollisionRec()))
             {
                 
-                collision = true;
-            }
-            if(collision)
-            {
                 knigth.undoMovement();
             }
         }
 
-        collision = false;
 
         // tick function for enemy 
-        goblin.tick(GetFrameTime());
+        for (auto enemy : enemies)
+        {
+            enemy->tick(GetFrameTime());
+        }
 
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
         {
-            if (CheckCollisionRecs( goblin.GetCollisionRec(), knigth.GetCollisionRec()) )
+            for (auto enemy : enemies)
             {
-                goblin.setAlive(false);
+                if (CheckCollisionRecs( enemy->GetCollisionRec(), knigth.GetCollisionRec()) )
+                {
+                    enemy->setAlive(false);
+                }
+
             }
+
         }
 
         

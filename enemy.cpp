@@ -20,6 +20,8 @@ void Enemy::tick(float deltaTime)
     //Get toTarget we will setup vector to character
 
     velocity = Vector2Subtract(target->getScreenPos(), getScreenPos());
+    // creation radius for enemy
+    if(Vector2Length(velocity) < radius) velocity = {};
 
     //we use Vector2SNormalize for toTarget vector + multiply it with speed
     //toTarget = Vector2Normalize(toTarget);
